@@ -1,0 +1,18 @@
+from app.models.models import (  # noqa: F401
+    Analysis,
+    AnalysisFile,
+    AnalysisStatus,
+    AuditLog,
+    Issue,
+    IssueStatus,
+    PasswordResetToken,
+    Project,
+    ProjectMember,
+    QualityMetric,
+    RefreshToken,
+    Repository,
+    Role,
+    SecurityFinding,
+    Severity,
+    User,
+)

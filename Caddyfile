@@ -1,0 +1,8 @@
+# Used only with:  docker compose --profile https up -d   (see deploy.sh)
+# Caddy obtains and renews a free HTTPS certificate for $DOMAIN automatically.
+# Requirements: the domain's DNS points at this server, and ports 80 and 443 are open.
+{$DOMAIN} {
+    encode gzip
+    reverse_proxy frontend:8080
+    header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+}

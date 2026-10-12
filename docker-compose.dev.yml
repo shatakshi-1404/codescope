@@ -1,0 +1,23 @@
+# Development extras: live code reload for the backend, API docs, and a published DB port.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+#   cd frontend && npm install && npm run dev        ->  http://localhost:5173
+#
+# Ports are bound to this computer only and can be changed in .env if they clash:
+#   POSTGRES_HOST_PORT (default 5433)   BACKEND_HOST_PORT (default 8000)
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
+
+  backend:
+    volumes:
+      - ./backend:/app
+    ports:
+      - "127.0.0.1:${BACKEND_HOST_PORT:-8000}:8000"
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  frontend:
+    profiles: ["full"]   # in development you run `npm run dev` instead

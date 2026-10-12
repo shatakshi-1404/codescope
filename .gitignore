@@ -1,0 +1,24 @@
+# secrets and local config
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# local env files for the frontend build
+frontend/.env
+frontend/.env.local

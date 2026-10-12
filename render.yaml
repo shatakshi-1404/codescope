@@ -1,0 +1,45 @@
+# Render Blueprint: the API and its database.
+# (The web app goes on Vercel: see DEPLOY-VERCEL-RENDER.md for the full walkthrough.)
+#
+# Use it: Render dashboard -> New -> Blueprint -> pick your GitHub repo.
+#
+# IMPORTANT: "free" plans are for trying things out. Free databases are deleted 30 days after
+# creation, free web services sleep after 15 idle minutes, and Render itself says not to use
+# free instances for production. Change both `plan:` lines to a paid plan for real use.
+
+databases:
+  - name: codescope-db
+    plan: free
+    postgresMajorVersion: "16"
+    databaseName: codescope
+    user: codescope
+    region: oregon
+
+services:
+  - type: web
+    name: codescope-api
+    runtime: docker
+    plan: free
+    region: oregon            # keep the same region as the database (private network)
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - backend/**          # changes to the frontend do not rebuild the API
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL     # postgresql://... : the app converts it for its psycopg driver
+        fromDatabase:
+          name: codescope-db
+          property: connectionString
+      - key: JWT_SECRET       # random 256-bit value, generated once by Render
+        generateValue: true
+      - key: CORS_ORIGINS     # Render asks for this when you create the Blueprint
+        sync: false           # = the address of your Vercel site, e.g. https://codescope.vercel.app
+      - key: MAX_REPO_MB      # free instances have 512 MB of RAM: keep repositories small
+        value: "100"
+      # Optional: also allow Vercel preview deployments (set in the dashboard, not here):
+      #   CORS_ORIGIN_REGEX = https://codescope(-[a-z0-9-]+)?\.vercel\.app
