@@ -69,12 +69,12 @@ A view of code-quality indicators and potential maintainability concerns.
   <img src="screenshots/code-health.png" alt="CodeScope Code Health Metrics" width="95%"/>
 </p>
 
-### 5. Security Findings
+### 5. Authentication & Account Creation
 
-A view of potential security issues and their severity, where supported by the implemented analyzer.
+Create a CodeScope account and securely access the application through its authentication system.
 
 <p align="center">
-  <img src="screenshots/security-findings.png" alt="CodeScope Security Findings" width="95%"/>
+  <img src="screenshots/authentication.png" alt="CodeScope Authentication and Create Account Page" width="95%"/>
 </p>
 
 ### 6. Issue Triage
@@ -93,14 +93,13 @@ A view of previous analyses and historical code-health information, where availa
   <img src="screenshots/analysis-history.png" alt="CodeScope Analysis History" width="95%"/>
 </p>
 
-### 8. Detailed Finding View
+### 8. Team Management & Role-Based Access Control
 
-Inspect an individual finding and the associated explanation or remediation guidance.
+Manage project members, invite users with existing CodeScope accounts, and assign roles such as Admin, Member, or Viewer to control access and collaboration.
 
 <p align="center">
-  <img src="screenshots/finding-details.png" alt="CodeScope Finding Details" width="95%"/>
+  <img src="screenshots/team-management.png" alt="CodeScope Team Management — Add Members and Manage Roles" width="95%"/>
 </p>
-
 ---
 
 ## ✨ Key Features
